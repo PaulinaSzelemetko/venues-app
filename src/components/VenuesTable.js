@@ -1,107 +1,122 @@
-import React, { useEffect, useState } from 'react';
-import { PARAMS, URL_VENUES_DETAILS }  from '../consts';
+import React, { useEffect, useState } from "react";
+import '../styles/VenuesTable.css';
+import { PARAMS, URL_VENUES_DETAILS } from "../consts";
 
-const VenueList = (props)  => {
-
-
-
+const VenuesTable = (props) => {
   const [venuesDetails, setVenuesDetails] = useState([]);
   const [participantsAdded, setParticipants] = useState(1);
+  const [columns, setColumns] = useState({});
+  const [theWinner, setTheWinner] = useState([]);
 
 
-  const venuesMock = [
-    {
-    "id": "5642aef9498e51025cf4a7a5",
-    'name':'fake1',
-    },
-    {
-      "id": "4bf58dd8d48988d1d5941735",
-      'name':'fake2',
-      },
-      {
-        "id": "4bf58dd8d48741735",
-        'name':'fake3',
-        }
-  ]
-    
+  const venues = props.venues;
+
+//   const getVenuesDetails = () => {
+//     const params = {
+//       client_id: PARAMS.client_id,
+//       client_secret: PARAMS.client_secret,
+//       v: PARAMS.v,
+//     };
 
 
-  const getVenuesDetails = ()  => {
+//       venues.map((item) => {
+//         const url = new URL(`https://api.foursquare.com/v2/venues/${item.id}`);
+//         url.search = new URLSearchParams(params).toString();
 
-    const params = {
-      client_id: PARAMS.client_id,
-      client_secret: PARAMS.client_secret,
-      v: PARAMS.v,
-    };
+//         fetch(url)
+//           .then((response) => response.json())
+//           .then((data) => console.log(data));
+//       });
+
+//  }
+
+  // useEffect(() => {
+  //   venues && getVenuesDetails();
+  // },[]);
+
+  // let winnerColumn;
 
 
-    Promise.all(props.venues.map((item) => {
-      const url =  new URL(URL_VENUES_DETAILS + item.id);
-      url.search = new URLSearchParams(params).toString();
+    useEffect(() => {
+     const checkAmountInColumns = Object.values(columns).reduce((result, current) => {
+       result[current] ? result[current]++ : result[current]=1;
+       return result },{});
+       
 
-      fetch(url)
-      .then(response => response.json())
-      .then(data => console.log(data));
-    }))
+      const winnerColumn = Object.keys(checkAmountInColumns).reduce((result, current) => { return checkAmountInColumns[result] > checkAmountInColumns[current] ? result : current}, []);
+       console.log("winner " + winnerColumn)
+       console.log(columns)
+
+       setTheWinner(prevState => ({ ...prevState, theWinner: winnerColumn }))
 
 
+  },[columns]);
+
+  const venueList = venues
+    ? venues.map((item, i) => {
+
+        return (
+          <div>
+            <span key={i}>{item.name}</span>
+            <span key={i}>{item.id}</span>
+          </div>
+        );
+      })
+    : null;
+
+  const addParticipant = () => {
+    setParticipants((participantsAdded) => participantsAdded + 1);
   };
 
 
-  useEffect(() => {
-    console.log(props);
-    props.venues && getVenuesDetails();
-  });
+  const onRadioClick = (columnNr, rowNr) => {
+    setColumns({...columns, [rowNr]: columnNr});
+   }
 
 
-    const venueList = props.venues ? props.venues.map((item, i) => {
-      
-     console.log(venuesDetails);
-      
-      return (
-        <div>
-        <span key={i}>{item.name}</span>
-        <span key={i}>{item.id}</span>
-    
-        </div>
-      )
-    }
+  const renderVenuesTable = (venues) => {
 
-    ) : null;
-
-    const addParticipant = () => {
-      setParticipants(participantsAdded => participantsAdded + 1)
-      console.log(participantsAdded);
-    }
+    console.log(Object.values(theWinner));
 
 
-    const renderVenuesTable = (venuesMock) => {
-      return (
-        <div>
+    return (
+      <div className='table-with-button'>
         <table>
           <thead>
-            <tr>Participans{venuesMock.map(venue => <th key={venue.id}>{venue.name}</th>)}</tr>
+            <tr>
+              <th>Participans</th>
+              {venues.map((venue) => (
+                <th key={venue.id}>{venue.name}</th>
+              ))}
+            </tr>
           </thead>
           <tbody>
-            {[...Array(participantsAdded)].map(() => 
-            <tr><input placeholder='Type your name...'/>{venuesMock.map(venue => <td key={venue.id}><input type='radio'/></td>)}</tr>
-)}
-            
-    
-    
+            {[...Array(participantsAdded)].map((name, index) => (
+              <tr>
+                <td><input placeholder="Type your name..." /></td>
+                {venues.map((venue) => (
+                  <td className={venue.id === 'fake' ? 'winner-column' : 'oridinary-column'} key={venue.id}>
+                    <input  type="radio" name={index} onClick={() => onRadioClick(venue.id, index)}/>
+                  </td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
         <button onClick={addParticipant}>Add participant</button>
-    
       </div>
-      )
-    }
+    );
+  };
 
-   return (
-     // venueList ?
-    venuesMock ? renderVenuesTable(venuesMock)
-    : <span>There is no venue matches criteria</span>
-   );
-}
 
-  export default VenueList;
+
+  return (
+    venues && venues.length > 0 ? (
+      renderVenuesTable(venues)
+    ) : (
+      <p className='no-venues-info'>There are no venues that match criteria.</p>
+    )
+  );
+};
+
+export default VenuesTable;
