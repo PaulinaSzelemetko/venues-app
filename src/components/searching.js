@@ -16,7 +16,7 @@ const Searching = (props)  => {
    return (
      <div className="Searching">
        <form>
-        <input type ='text' onChange={searchInputHandler} value={value} placeholder='search for venues...' />
+        <input type ='text' onChange={searchInputHandler} value={value} placeholder='Search for venues...' />
         <button onClick={handleSubmit}>Search</button>
       </form>
     </div>

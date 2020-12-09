@@ -1,7 +1,7 @@
 import './App.css';
-import  Searching  from './components/searching';
-import  VenueList  from './components/venues';
-import { PARAMS, URL_ADDRESS }  from './consts';
+import  Searching  from './components/Searching';
+import  VenueList  from './components/VenuesTable';
+import { PARAMS, URL_ALL_VENUES }  from './consts';
 
 
 import { useEffect, useState } from 'react';
@@ -14,12 +14,12 @@ function App() {
   }
  
   useEffect(() => {
-    // console.log(venues);
+    console.log(venues);
   });
 
   const getVenues = (address)  => {
 
-    const url =  new URL(URL_ADDRESS);
+    const url =  new URL(URL_ALL_VENUES);
     const params = {
       client_id: PARAMS.client_id,
       client_secret: PARAMS.client_secret,
