@@ -1,29 +1,57 @@
 .table-with-button {
-    font-family: arial, sans-serif;
-    /* width: 90%; */
-    margin-left: 120px;
-  }
+  font-family: arial, sans-serif;
+  margin-left: 120px;
+  color: #696969;
+}
 
-  table {
-      width: 70%;;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    width: 25%;
-  }
+table {
+  width: 70%;
+  background-color: #f8f8ff;
+  text-align: center;
+}
 
-  .winner-th, .winner-td {
-      background-color: aqua;
-  }
+td,
+th {
+  background-color: #d3d3d3;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  padding: 18px;
+  width: 20%;
+}
 
-  td .input:checked  {
-    background-color:red;
-  }
+td {
+  background-color: #c0c0c0;
+}
 
-  .no-venues-info {
-      margin-left: 120px;
-  }
-  
+.winner-column {
+  background-color: #90ee90;
+}
+
+.table-body input[type="text"] {
+  border: none;
+  border-radius: 4px;
+  outline: 0;
+  padding: 10px;
+  width: 90%;
+  background-color: #e8eeef;
+  color: #696969;
+}
+
+input[type="radio"]:checked {
+  box-shadow: 0 0 0 8px #32cd32;
+  color: black;
+}
+
+button {
+  background: #00ffff;
+  margin-top: 20px;
+  width: 200px;
+  height: 40px;
+  border: 1px solid #00ffff;
+  border-radius: 4px;
+  color: #696969;
+}
+
+.no-venues-info {
+  margin-left: 120px;
+}

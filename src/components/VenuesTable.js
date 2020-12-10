@@ -55,17 +55,6 @@ const VenuesTable = (props) => {
     setTheWinner(columnsWithTheHighestScore);
   }, [columns]);
 
-  const venueList = venues
-    ? venues.map((item, i) => {
-        return (
-          <div>
-            <span key={i}>{item.name}</span>
-            <span key={i}>{item.id}</span>
-          </div>
-        );
-      })
-    : null;
-
   const addParticipant = () => {
     setParticipants((participantsAdded) => participantsAdded + 1);
   };
@@ -75,7 +64,7 @@ const VenuesTable = (props) => {
   };
 
   const renderVenuesTable = (venues) => {
-    
+
     return (
       <div className="table-with-button">
         <table>
@@ -83,20 +72,24 @@ const VenuesTable = (props) => {
             <tr>
               <th>Participans</th>
               {venues.map((venue) => (
-                <th                  className={
-                      theWinner.includes(venue.id)
-                        ? "winner-column"
-                        : "oridinary-column"
-                    }
-                key={venue.id}>{venue.name}</th>
+                <th
+                  className={
+                    theWinner.includes(venue.id)
+                      ? "winner-column"
+                      : "oridinary-column"
+                  }
+                  key={venue.id}
+                >
+                  {venue.name}
+                </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className='table-body'>
             {[...Array(participantsAdded)].map((name, index) => (
               <tr>
                 <td>
-                  <input placeholder="Type your name..." />
+                  <input type='text' placeholder="Type your name..." />
                 </td>
                 {venues.map((venue) => (
                   <td
@@ -123,10 +116,10 @@ const VenuesTable = (props) => {
     );
   };
 
-  return venues && venues.length > 0 ? (
+  return venues && venues.length ? (
     renderVenuesTable(venues)
   ) : (
-    <p className="no-venues-info">There are no venues that match criteria.</p>
+    <p className="no-venues-info">There are no venues to show.</p>
   );
 };
 
