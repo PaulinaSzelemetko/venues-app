@@ -21,6 +21,10 @@ td {
   background-color: #dfdfdf;
 }
 
+th .categories {
+  font-size: 14px;
+}
+
 .winner-column {
   background-color: #90ee90;
 }

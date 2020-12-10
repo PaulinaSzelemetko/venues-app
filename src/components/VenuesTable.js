@@ -3,10 +3,8 @@ import "../styles/VenuesTable.css";
 import "../styles/GlobalStyles.css";
 import TableHeaderBox from "./TableHeaderBox";
 
-import { PARAMS, URL_VENUES_DETAILS } from "../consts";
-
 const VenuesTable = (props) => {
-  const [venuesDetails, setVenuesDetails] = useState([]);
+  // const [venuesDetails, setVenuesDetails] = useState([]);
   const [participantsAdded, setParticipants] = useState(1);
   const [columns, setColumns] = useState({});
   const [theWinner, setTheWinner] = useState([]);
@@ -26,7 +24,7 @@ const VenuesTable = (props) => {
     const columnsWithTheHighestScore = Object.keys(votesAmountInColumns).filter(
       (number) => {
         return (
-          votesAmountInColumns[number] ==
+          votesAmountInColumns[number] ===
           Math.max.apply(null, Object.values(votesAmountInColumns))
         );
       }
@@ -58,7 +56,8 @@ const VenuesTable = (props) => {
           </thead>
           <tbody className="table-body">
             {[...Array(participantsAdded)].map((name, index) => (
-              <tr>
+              <tr                     key={index}
+              >
                 <td>
                   <input type="text" placeholder="Type your name..." />
                 </td>

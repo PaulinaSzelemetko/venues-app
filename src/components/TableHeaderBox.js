@@ -1,8 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/VenuesTable.css";
 
-const TableHeaderBox = (props) => { 
-    return (
+const TableHeaderBox = (props) => {
+  const getCategory = (id) =>
+    props.venues
+      .find((item) => item.id === id)
+      .categories.map((item) => item.name);
+
+  return (
     <React.Fragment>
       <th>Participans</th>
       {props.venues.map((venue) => (
@@ -14,7 +19,20 @@ const TableHeaderBox = (props) => {
           }
           key={venue.id}
         >
-          <p><a href={props.details[venue.id]}>{venue.name}</a></p>
+          <p>
+            <a href={props.details[venue.id]}>{venue.name}</a>
+          </p>
+          {getCategory(venue.id).length > 0 ? (
+            <p className="categories">
+              Categories: <br />
+              {getCategory(venue.id)}
+            </p>
+          ) : (
+            <p className="categories">
+              Categories: <br />
+              no categories added
+            </p>
+          )}
         </th>
       ))}
     </React.Fragment>
