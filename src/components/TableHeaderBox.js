@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/VenuesTable.css";
 
 const TableHeaderBox = (props) => { 
-
-    console.log("props")
-    console.log(props.details)
-  return (
+    return (
     <React.Fragment>
       <th>Participans</th>
       {props.venues.map((venue) => (

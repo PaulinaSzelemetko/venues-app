@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/VenuesTable.css";
+import "../styles/GlobalStyles.css";
 import TableHeaderBox from "./TableHeaderBox";
 
 import { PARAMS, URL_VENUES_DETAILS } from "../consts";
@@ -43,20 +44,23 @@ const VenuesTable = (props) => {
   };
 
   const renderVenuesTable = (venues) => {
-
     return (
       <div className="table-with-button">
         <table>
           <thead>
             <tr>
-              <TableHeaderBox venues={venues} details={venuesURLsfromDetails} theWinner={theWinner}/>
+              <TableHeaderBox
+                venues={venues}
+                details={venuesURLsfromDetails}
+                theWinner={theWinner}
+              />
             </tr>
           </thead>
-          <tbody className='table-body'>
+          <tbody className="table-body">
             {[...Array(participantsAdded)].map((name, index) => (
               <tr>
                 <td>
-                  <input type='text' placeholder="Type your name..." />
+                  <input type="text" placeholder="Type your name..." />
                 </td>
                 {venues.map((venue) => (
                   <td

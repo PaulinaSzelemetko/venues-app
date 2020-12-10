@@ -1,4 +1,4 @@
-import "./styles/App.css";
+import "./styles/GlobalStyles.css";
 import VenuesTable from "./components/VenuesTable";
 import Searching from "./components/Searching";
 
@@ -37,24 +37,27 @@ function App() {
       .then((response) => {
         const detailsObject = {};
 
-        response.response.venues.map((item) => {
-          const urlDetail = new URL(URL_VENUES_DETAILS + item.id);
-          urlDetail.search = new URLSearchParams(paramsDetail).toString();
+        response.response.venues &&
+          response.response.venues.map((item) => {
+            const urlDetail = new URL(URL_VENUES_DETAILS + item.id);
+            urlDetail.search = new URLSearchParams(paramsDetail).toString();
 
-          detailsObject[item.id] = getVenuesDetails(urlDetail);
-        });
-        console.log(detailsObject);
+            fetch(urlDetail)
+              .then((response) => response.json())
+              .then((response) => {
+                detailsObject[item.id] = response.response.venue.shortUrl;
+                setVenuesURLfromDetails({ ...detailsObject });
+              });
+          });
         setVenues(response.response.venues);
-        setVenuesURLfromDetails(detailsObject);
       });
   };
 
   async function getVenuesDetails(urlDetail) {
-    let shortUrl;
-    await fetch(urlDetail)
+    let shortUrl = await fetch(urlDetail)
       .then((response) => response.json())
       .then((response) => {
-        shortUrl = response.response.venue.shortUrl;
+        return response.response.venue.shortUrl;
       });
     return shortUrl;
   }

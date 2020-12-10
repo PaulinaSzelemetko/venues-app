@@ -1,0 +1,30 @@
+.venues-app-container {
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type="text"] {
+  border: none;
+  border-radius: 6px;
+  margin-right: 20px;
+  outline: 0;
+  width: 400px;
+  padding-left: 10px;
+  height: 50px;
+  background-color: #edf1f1;
+  color: #696969;
+}
+
+button {
+  background: #00ffff;
+  margin-top: 20px;
+  width: 200px;
+  height: 50px;
+  border: 1px solid #00ffff;
+  border-radius: 4px;
+  color: #696969;
+}
+
+a {
+  color: rgb(77, 77, 77);
+}
