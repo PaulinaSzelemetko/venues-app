@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../styles/VenuesTable.css";
 import "../styles/GlobalStyles.css";
 import TableHeaderBox from "./TableHeaderBox";
+import TableBody from "./TableBody";
 
 const VenuesTable = (props) => {
-  // const [venuesDetails, setVenuesDetails] = useState([]);
   const [participantsAdded, setParticipants] = useState(1);
   const [columns, setColumns] = useState({});
   const [theWinner, setTheWinner] = useState([]);
@@ -45,41 +45,17 @@ const VenuesTable = (props) => {
     return (
       <div className="table-with-button">
         <table>
-          <thead>
-            <tr>
-              <TableHeaderBox
-                venues={venues}
-                details={venuesURLsfromDetails}
-                theWinner={theWinner}
-              />
-            </tr>
-          </thead>
-          <tbody className="table-body">
-            {[...Array(participantsAdded)].map((name, index) => (
-              <tr                     key={index}
-              >
-                <td>
-                  <input type="text" placeholder="Type your name..." />
-                </td>
-                {venues.map((venue) => (
-                  <td
-                    className={
-                      theWinner.includes(venue.id)
-                        ? "winner-column"
-                        : "oridinary-column"
-                    }
-                    key={venue.id}
-                  >
-                    <input
-                      type="radio"
-                      name={index}
-                      onClick={() => onRadioClick(venue.id, index)}
-                    />
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
+          <TableHeaderBox
+            venues={venues}
+            details={venuesURLsfromDetails}
+            theWinner={theWinner}
+          />
+          <TableBody
+            venues={venues}
+            onRadioClick={onRadioClick}
+            participantsAdded={participantsAdded}
+            theWinner={theWinner}
+          />
         </table>
         <button onClick={addParticipant}>Add participant</button>
       </div>
