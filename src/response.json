@@ -1,1 +1,75 @@
-{"meta":{"code":200,"requestId":"5fd159be8cc76a4d45fb6a59"},"response":{"venue":{"id":"53c52a62498edd44cd2992e5","name":"secret lunch place","contact":{},"location":{"lat":52.52440325982844,"lng":13.405269659111534,"labeledLatLngs":[{"label":"display","lat":52.52440325982844,"lng":13.405269659111534}],"cc":"DE","neighborhood":"Mitte","city":"Berlin","state":"Berlin","country":"Germany","formattedAddress":["Berlin","Germany"]},"canonicalUrl":"https:\/\/foursquare.com\/v\/secret-lunch-place\/53c52a62498edd44cd2992e5","categories":[{"id":"4bf58dd8d48988d163941735","name":"Park","pluralName":"Parks","shortName":"Park","icon":{"prefix":"https:\/\/ss3.4sqi.net\/img\/categories_v2\/parks_outdoors\/park_","suffix":".png"},"primary":true}],"verified":false,"stats":{"tipCount":0},"likes":{"count":0,"groups":[]},"dislike":false,"ok":false,"beenHere":{"count":0,"unconfirmedCount":0,"marked":false,"lastCheckinExpiredAt":0},"specials":{"count":0,"items":[]},"photos":{"count":0,"groups":[]},"reasons":{"count":0,"items":[]},"hereNow":{"count":0,"summary":"Nobody here","groups":[]},"createdAt":1405430370,"tips":{"count":0,"groups":[]},"shortUrl":"http:\/\/4sq.com\/1jugX2w","timeZone":"Europe\/Berlin","listed":{"count":0,"groups":[{"type":"others","name":"Lists from other people","count":0,"items":[]}]},"seasonalHours":[],"pageUpdates":{"count":0,"items":[]},"inbox":{"count":0,"items":[]},"attributes":{"groups":[]}}}}
+// export const mockresponse = {
+//   "meta": { "code": 200, "requestId": "5fd159be8cc76a4d45fb6a59" },
+//   "response": {
+//     "venue": {
+//       "id": "53c52a62498edd44cd2992e5",
+//       "name": "secret lunch place",
+//       "contact": {},
+//       "location": {
+//         "lat": 52.52440325982844,
+//         "lng": 13.405269659111534,
+//         "labeledLatLngs": [
+//           {
+//             "label": "display",
+//             "lat": 52.52440325982844,
+//             "lng": 13.405269659111534
+//           }
+//         ],
+//         "cc": "DE",
+//         "neighborhood": "Mitte",
+//         "city": "Berlin",
+//         "state": "Berlin",
+//         "country": "Germany",
+//         "formattedAddress": ["Berlin", "Germany"]
+//       },
+//       "canonicalUrl": "https://foursquare.com/v/secret-lunch-place/53c52a62498edd44cd2992e5",
+//       "categories": [
+//         {
+//           "id": "4bf58dd8d48988d163941735",
+//           "name": "Park",
+//           "pluralName": "Parks",
+//           "shortName": "Park",
+//           "icon": {
+//             "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_",
+//             "suffix": ".png"
+//           },
+//           "primary": true
+//         }
+//       ],
+//       "verified": false,
+//       "stats": { "tipCount": 0 },
+//       "likes": { "count": 0, "groups": [] },
+//       "dislike": false,
+//       "ok": false,
+//       "beenHere": {
+//         "count": 0,
+//         "unconfirmedCount": 0,
+//         "marked": false,
+//         "lastCheckinExpiredAt": 0
+//       },
+//       "specials": { "count": 0, "items": [] },
+//       "photos": { "count": 0, "groups": [] },
+//       "reasons": { "count": 0, "items": [] },
+//       "hereNow": { "count": 0, "summary": "Nobody here", "groups": [] },
+//       "createdAt": 1405430370,
+//       "tips": { "count": 0, "groups": [] },
+//       "shortUrl": "http://4sq.com/1jugX2w",
+//       "timeZone": "Europe/Berlin",
+//       "listed": {
+//         "count": 0,
+//         "groups": [
+//           {
+//             "type": "others",
+//             "name": "Lists from other people",
+//             "count": 0,
+//             "items": []
+//           }
+//         ]
+//       },
+//       "seasonalHours": [],
+//       "pageUpdates": { "count": 0, "items": [] },
+//       "inbox": { "count": 0, "items": [] },
+//       "attributes": { "groups": [] }
+//     }
+//   }
+// }

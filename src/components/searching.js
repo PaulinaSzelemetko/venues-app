@@ -17,7 +17,7 @@ const Searching = (props) => {
 
   return (
     <div className="searching">
-      <form>
+      <form className='searching-form'>
         <input
           type="text"
           onChange={searchInputHandler}

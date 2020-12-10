@@ -1,47 +1,18 @@
 import "./styles/App.css";
-import Searching from "./components/Searching";
 import VenuesTable from "./components/VenuesTable";
-import { PARAMS, URL_ALL_VENUES } from "./consts";
+import Searching from "./components/Searching";
 
-import { useEffect, useState } from "react";
+import { PARAMS, URL_ALL_VENUES, URL_VENUES_DETAILS } from "./consts";
+
+import { useState } from "react";
 
 function App() {
   const [venues, setVenues] = useState([]);
-  const [venuesDetails, setVenuesDetails] = useState([]);
-
-
-  useEffect(() => {
-    console.log(venues);
-    // getVenuesDetails();
-  },[venues]);
+  const [venuesURLsfromDetails, setVenuesURLfromDetails] = useState({});
 
   const handleSubmit = (value) => {
     getVenues(value);
   };
-
-  
-  // const getVenuesDetails = () => {
-  //   const params = {
-  //     client_id: PARAMS.client_id,
-  //     client_secret: PARAMS.client_secret,
-  //     limit: PARAMS.limit,
-  //     query: PARAMS.query,
-  //     v: PARAMS.v,    };
-
-
-  //     venues.map((item) => {
-  //       const url = new URL(`https://api.foursquare.com/v2/venues/${item.id}`);
-  //       url.search = new URLSearchParams(params).toString();
-
-  //       fetch(url)
-  //         .then((response) => response.json())
-  //         .then((response) => console.log(response));
-  //     });
-
-  //   }
-
-
-
 
   const getVenues = (address) => {
     const url = new URL(URL_ALL_VENUES);
@@ -53,37 +24,48 @@ function App() {
       near: address,
       v: PARAMS.v,
     };
+    const paramsDetail = {
+      client_id: PARAMS.client_id,
+      client_secret: PARAMS.client_secret,
+      v: PARAMS.v,
+    };
 
     url.search = new URLSearchParams(params).toString();
 
     fetch(url)
       .then((response) => response.json())
       .then((response) => {
-        setVenues(response.response.venues);
-      })
-      // .then(
-      //   venues && venues.map((item) => {
-      //     const urlDetail = new URL(`https://api.foursquare.com/v2/venues/${item.id}`);
-      //     urlDetail.search = new URLSearchParams(paramsDetail).toString();
+        const detailsObject = {};
 
-      //     console.log(urlDetail);
-  
-      //     fetch(urlDetail)
-      //       .then((response) => response.json())
-      //       .then((response) => {
-      //         console.log(response);
-      //       })
-      //   })
-      // )
+        response.response.venues.map((item) => {
+          const urlDetail = new URL(URL_VENUES_DETAILS + item.id);
+          urlDetail.search = new URLSearchParams(paramsDetail).toString();
+
+          detailsObject[item.id] = getVenuesDetails(urlDetail);
+        });
+        console.log(detailsObject);
+        setVenues(response.response.venues);
+        setVenuesURLfromDetails(detailsObject);
+      });
   };
 
-
- 
+  async function getVenuesDetails(urlDetail) {
+    let shortUrl;
+    await fetch(urlDetail)
+      .then((response) => response.json())
+      .then((response) => {
+        shortUrl = response.response.venue.shortUrl;
+      });
+    return shortUrl;
+  }
 
   return (
-    <div className='venues-app-container'>
+    <div className="venues-app-container">
       <Searching onSubmit={(value) => handleSubmit(value)} />
-      <VenuesTable venues={venues} />
+      <VenuesTable
+        venues={venues}
+        venuesURLsfromDetails={venuesURLsfromDetails}
+      />
     </div>
   );
 }

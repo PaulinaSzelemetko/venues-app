@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/VenuesTable.css";
+import TableHeaderBox from "./TableHeaderBox";
+
 import { PARAMS, URL_VENUES_DETAILS } from "../consts";
 
 const VenuesTable = (props) => {
@@ -9,30 +11,7 @@ const VenuesTable = (props) => {
   const [theWinner, setTheWinner] = useState([]);
 
   const venues = props.venues;
-
-  //   const getVenuesDetails = () => {
-  //     const params = {
-  //       client_id: PARAMS.client_id,
-  //       client_secret: PARAMS.client_secret,
-  //       v: PARAMS.v,
-  //     };
-
-  //       venues.map((item) => {
-  //         const url = new URL(`https://api.foursquare.com/v2/venues/${item.id}`);
-  //         url.search = new URLSearchParams(params).toString();
-
-  //         fetch(url)
-  //           .then((response) => response.json())
-  //           .then((data) => console.log(data));
-  //       });
-
-  //  }
-
-  // useEffect(() => {
-  //   venues && getVenuesDetails();
-  // },[]);
-
-  // let winnerColumn;
+  const venuesURLsfromDetails = props.venuesURLsfromDetails;
 
   useEffect(() => {
     const votesAmountInColumns = Object.values(columns).reduce(
@@ -70,19 +49,7 @@ const VenuesTable = (props) => {
         <table>
           <thead>
             <tr>
-              <th>Participans</th>
-              {venues.map((venue) => (
-                <th
-                  className={
-                    theWinner.includes(venue.id)
-                      ? "winner-column"
-                      : "oridinary-column"
-                  }
-                  key={venue.id}
-                >
-                  {venue.name}
-                </th>
-              ))}
+              <TableHeaderBox venues={venues} details={venuesURLsfromDetails} theWinner={theWinner}/>
             </tr>
           </thead>
           <tbody className='table-body'>
